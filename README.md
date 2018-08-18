@@ -1,7 +1,7 @@
 ResolutionBlur
 ===
 
-Ref : [https://github.com/a3geek/ResolutionBlur](https://github.com/a3geek/ResolutionBlur)
+Ref : [https://github.com/a3geek/ResolutionBlur](https://github.com/a3geek/ResolutionBlur)  
 Ref : [https://t-pot.com/program/51_bokashi/index.html](https://t-pot.com/program/51_bokashi/index.html)
 
 段階的に解像度を下げていくぼかし手法は、ダウンサンプリングやアップサンプリングの時にGPU側の処理に依存しているため、あまり綺麗に補間されない。  
