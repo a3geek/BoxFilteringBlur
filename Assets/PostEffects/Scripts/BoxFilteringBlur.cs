@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BoxFilteringBlur
+namespace PostEffects
 {
     [AddComponentMenu("")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Camera))]
-    public class Blur : MonoBehaviour
+    public class BoxFilteringBlur : MonoBehaviour
     {
         public const string PropDelta = "_Delta";
         public const int MaxIteration = 10;

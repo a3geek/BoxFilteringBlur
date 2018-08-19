@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Blur"
+﻿Shader "Hidden/BoxFilteringBlur"
 {
     Properties
     {
@@ -27,17 +27,22 @@
                 return tex2D(_MainTex, uv).rgb;
             }
 
-            float4 frag(v2f_img i) : SV_Target
+            float4 BoxFilteringBlur(float2 uv, float delta)
             {
-                float4 offset = _MainTex_TexelSize.xyxy * float2(-_Delta, _Delta).xxyy;
+                float4 offset = _MainTex_TexelSize.xyxy * float2(-delta, delta).xxyy;
 
                 // Sampling from diagonal four points.
-                float3 col = Sampling(i.uv + offset.xy) // Bottom Left
-                    + Sampling(i.uv + offset.zy)    // Bottom Right
-                    + Sampling(i.uv + offset.xw)    // Top Left
-                    + Sampling(i.uv + offset.zw);   // Top Right
+                float3 col = Sampling(uv + offset.xy) // Bottom Left
+                    + Sampling(uv + offset.zy)    // Bottom Right
+                    + Sampling(uv + offset.xw)    // Top Left
+                    + Sampling(uv + offset.zw);   // Top Right
 
-                return float4(col.rgb * 0.25, tex2D(_MainTex, i.uv).a);
+                return float4(col.rgb * 0.25, tex2D(_MainTex, uv).a);
+            }
+
+            float4 frag(v2f_img i) : SV_Target
+            {
+                return BoxFilteringBlur(i.uv, _Delta);
             }
             ENDCG
         }
