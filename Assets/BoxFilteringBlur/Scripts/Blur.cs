@@ -10,20 +10,20 @@ namespace BoxFilteringBlur
     public class Blur : MonoBehaviour
     {
         public const string PropDelta = "_Delta";
-        public const int MaxIntensity = 10;
+        public const int MaxIteration = 10;
 
         [SerializeField]
         private bool validity = true;
         [SerializeField]
         private Material material = null;
-        [SerializeField, Range(1, MaxIntensity)]
-        private int intensity = 3;
+        [SerializeField, Range(1, MaxIteration)]
+        private int iteration = 3;
         [SerializeField]
         private float downRate = 1f;
         [SerializeField]
         private float upRate = 0.5f;
 
-        private RenderTexture[] rts = new RenderTexture[MaxIntensity];
+        private RenderTexture[] rts = new RenderTexture[MaxIteration];
 
 
         private void OnRenderImage(RenderTexture source, RenderTexture destination)
@@ -41,7 +41,7 @@ namespace BoxFilteringBlur
             this.material.SetFloat(PropDelta, this.downRate);
 
             // Step downsampling.
-            for(i = 0; i < this.intensity; i++)
+            for(i = 0; i < this.iteration; i++)
             {
                 width /= 2;
                 height /= 2;
